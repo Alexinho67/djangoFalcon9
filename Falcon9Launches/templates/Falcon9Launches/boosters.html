@@ -1,0 +1,32 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    <h1>Falcon 9 boostersss</h1>
+        {% if boosters %}
+            <div class="boosterList" >
+            {% for b in boosters  %}
+                <div> <strong>Number: </strong>{{b.number}} - <strong>Status: </strong>{{b.get_current_status_display}} </div>
+            {% endfor %}
+            </div>
+        {% else %}
+            <div> No boosters created yet. </div>
+        {% endif %}
+
+{% endblock %}
+
+{% block form  %}
+    <h2>Add new booster </h2>
+    <form action="boosters/create" method="POST">
+        {% csrf_token %}
+        <label for="number">Number:</label>
+        <input type="text" id="numberBooster" name="number"/>
+        <label for="statusBooster">Current status:</label>
+        <select name="status" id="statusBooster">
+            <option value="">...select</option>
+            {% for short, long in status_choices %}
+                <option value="{{short}}">{{long}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" > Create </button>
+    </form>
+{% endblock  %}

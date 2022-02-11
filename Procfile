@@ -1,0 +1,1 @@
+web: gunicorn spaceX.wsgi:application --log-file -
