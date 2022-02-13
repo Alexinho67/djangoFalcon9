@@ -1,0 +1,25 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h1>Falcon 9 launch complexes</h1>
+        {% if complexes %}
+            <div >
+            {% for complex in complexes  %}
+                <div class="launchComplex"> <div>
+                    <h3>{{complex.name}}</h3> <br/>
+                    <p><strong>Launch site:</strong> {{complex.launch_site.name}}</p>
+                </div>
+                {% if  complex.image%}
+                    <img src="{{complex.image.url}}" width="500" > </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div> No launch complexes found. </div>
+        {% endif %}
+
+{% endblock %}
+
+{% block form  %}
+{% endblock  %}

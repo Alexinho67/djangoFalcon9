@@ -1,0 +1,49 @@
+body{
+    margin:0;
+    padding:0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main{
+    margin:0 auto;
+    width: fit-content;
+    min-width: 60vh;
+}
+
+.boosterList>div{
+    height: 2em;
+    width: 500px;
+    padding:3px;
+}
+.boosterList>div:nth-child(even){
+    background-color:#aaa;
+}
+.boosterList>div:nth-child(odd){
+    background-color:#bbb;
+}
+.boosterLine{
+    display:flex;
+    justify-content: space-between;
+}
+
+.launchComplex{
+    width: 50vw;
+    display:flex;
+    padding:1em;
+    justify-content: space-between;
+    border:1px solid black;
+    margin-bottom: 1em;
+    background-color: #aaa;
+}
+
+.launchComplex h3,p{
+    margin:0;
+}
+
+.errorValidation{
+    padding:2px;
+    width: fit-content;
+    background-color: rgb(229 151 151);
+    color: rgb(150, 5, 5);
+    border-radius: 2px;
+}

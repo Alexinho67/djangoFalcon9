@@ -21,6 +21,9 @@ class Booster(models.Model):
     def __str__(self):
         return self.number
 
+    def clean(self):
+        print('running the "clean() method of Booster!!!')
+
 class LaunchSite(models.Model):
     name = models.CharField(max_length = 64)
     city = models.CharField(max_length = 64)
@@ -32,6 +35,7 @@ class LaunchSite(models.Model):
 class LaunchComplex(models.Model):
     name = models.CharField(max_length = 64)
     launch_site = models.ForeignKey(LaunchSite, on_delete=models.Case)
+    image = models.ImageField(null = True, upload_to ='uploads/')
 
     def __str__(self):
         return self.name
@@ -50,7 +54,7 @@ class Flight(models.Model):
         ('C', 'Cancelled'),
     )
 
-    flight_number = models.IntegerField(max_length=16)
+    flight_number = models.IntegerField()
     date = models.DateField('date of flight')
     booster = models.ForeignKey(Booster, on_delete=models.CASCADE)
     outcome = models.CharField(max_length=1, choices=OUTCOMES)

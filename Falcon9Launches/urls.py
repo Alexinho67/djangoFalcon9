@@ -4,5 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('boosters', views.boosters, name="boosters"),
-    path('boosters/create', views.boosterCreate, name="boosterCreate"),
+    path('launchcomplexes', views.launchcomplexes, name="launchcomplexes"),
+    # path('boosters/create', views.boosterCreate, name="boosterCreate"),
+    path('boosters/delete/<int:id_booster>', views.boosterDelete, name="boostersDelete")
 ]   

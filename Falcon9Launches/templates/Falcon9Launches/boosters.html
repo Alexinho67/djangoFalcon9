@@ -1,12 +1,15 @@
 {% extends "Falcon9Launches/layout.html" %}
 
 {% block content%}
-    <h1>Falcon 9 boostersss</h1>
+    
+    <h1>Falcon 9 boosters</h1>
         {% if boosters %}
             <div class="boosterList" >
-            {% for b in boosters  %}
-                <div> <strong>Number: </strong>{{b.number}} - <strong>Status: </strong>{{b.get_current_status_display}} </div>
-            {% endfor %}
+          
+            {% for b in boosters  %}{% with status=b.get_current_status_display  %}
+                <div class="boosterLine"> <span><strong>Number: </strong>{{b.number}} - <strong>Status: </strong>{{status}}</span> 
+                    <button class="buttonDelete" data-id={{b.id}} >Delete </button></div>
+                {% endwith %}{% endfor %}
             </div>
         {% else %}
             <div> No boosters created yet. </div>
@@ -16,7 +19,12 @@
 
 {% block form  %}
     <h2>Add new booster </h2>
-    <form action="boosters/create" method="POST">
+    {%if errorsDict%}
+        {% for key,val in errorsDict.items  %}
+            <p class="errorValidation">{{key|capfirst}}: {{val|first|capfirst}} </p>
+        {% endfor %}
+    {% endif %}
+    <form action="boosters" method="POST">
         {% csrf_token %}
         <label for="number">Number:</label>
         <input type="text" id="numberBooster" name="number"/>
