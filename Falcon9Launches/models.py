@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -28,6 +29,7 @@ class LaunchSite(models.Model):
     name = models.CharField(max_length = 64)
     city = models.CharField(max_length = 64)
     state = models.CharField(max_length = 64)
+    
 
     def __str__(self):
         return self.name
@@ -43,7 +45,8 @@ class LaunchComplex(models.Model):
 class Mission(models.Model):
     name = models.CharField(max_length = 256)
     operator = models.CharField(max_length = 256)
-    
+    image = CloudinaryField('image', null = True)
+
     def __str__(self):
         return self.name
 

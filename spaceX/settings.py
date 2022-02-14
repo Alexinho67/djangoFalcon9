@@ -14,6 +14,9 @@ import dj_database_url
 from pathlib import Path
 import os
 import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import cloudinary_storage
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -46,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
 ]
@@ -133,10 +137,22 @@ USE_TZ = True
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'himfykazc',
-    'API_KEY': str(os.getenv('YOUR_API_KEY')),
-    'API_SECRET': str(os.getenv('YOUR_API_SECRET')),
+    'API_KEY': str(os.getenv('API_KEY')),
+    'API_SECRET': str(os.getenv('API_SECRET')),
 }
+
+cloudinary.config( 
+  cloud_name = 'himfykazc',
+  api_key = str(os.getenv('API_KEY')), 
+  api_secret = str(os.getenv('API_SECRET')),
+  secure = True
+)
+
+for k in CLOUDINARY_STORAGE:
+    print(f'CLOUDINARY_STORAGE: {k}-{CLOUDINARY_STORAGE[k]}')
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 STATIC_URL = '/static/'
 
