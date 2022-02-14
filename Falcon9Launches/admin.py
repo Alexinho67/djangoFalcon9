@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Booster, Flight,LaunchComplex, LaunchSite , Mission 
+from .models import Booster, Flight,LaunchComplex, LaunchSite , Mission ,  Photo
 # Register your models here.
 
 class LaunchComplexAdmin(admin.ModelAdmin):
     list_display= ['id', 'name', 'launch_site']
 
 
+admin.site.register(Photo)
 admin.site.register(Booster)
 admin.site.register(Flight)
 admin.site.register(LaunchComplex, LaunchComplexAdmin)

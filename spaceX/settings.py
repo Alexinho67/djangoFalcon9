@@ -9,14 +9,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+from pathlib import Path
 import django_heroku
 import dj_database_url
-from pathlib import Path
-import os
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-import cloudinary_storage
+import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -28,17 +27,13 @@ print(f'Setting.py: BASE_DIR: {BASE_DIR}')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-m2pd%=blf)6uzwd8+mf!qs842r7-dqbrz+(o*51qo+tmfmoa^7'
+SECRET_KEY = 'django-insecure-m2pd%=blf)6uzwd8+mf!qs842r7-dqbrz+(o*51qo+tmfmoa^7'
 
-SECRET_KEY  = str(os.getenv('SECRET_KEY'))
-DUMMYKEY  = str(os.getenv('DUMMY_KEY'))
-print(f'setting.py: the value of DUMMYKEY from .env is: {DUMMYKEY}')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -51,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     # 'cloudinary_storage',
     'django.contrib.staticfiles',
-    # 'cloudinary',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -91,8 +86,7 @@ WSGI_APPLICATION = 'spaceX.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(), 
-    'defaultDev': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
@@ -136,39 +130,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'himfykazc',
-#     'API_KEY': str(os.getenv('API_KEY')),
-#     'API_SECRET': str(os.getenv('API_SECRET')),
-# }
 
-# for k in CLOUDINARY_STORAGE:
-#     print(f'CLOUDINARY_STORAGE: {k}-{CLOUDINARY_STORAGE[k]}')
-
-# cloudinary.config( 
-#   cloud_name = 'himfykazc',
-#   api_key = str(os.getenv('API_KEY')), 
-#   api_secret = str(os.getenv('API_SECRET')),
-#   secure = True
-# )
-
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-STATIC_URL = '/static/'
-# if DEBUG:
-#        STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, 'static'),
-#    ]
-# else:
-#        STATIC_ROOT = os.path.join(BASE_DIR,'static')
-
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
-print(f'Setting.py: MEDIA_ROOT:{MEDIA_ROOT}')
-MEDIA_URL = '/uploadmediaurl/'
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config( 
+  cloud_name = 'hnyvz0c0n',
+  api_key = '732989989367662', 
+  api_secret = 'FEILpe3jzreCH2xzJxyBroVzFw8',
+)
+
+# CLOUDINARY_URL=cloudinary://732989989367662:FEILpe3jzreCH2xzJxyBroVzFw8@hnyvz0c0n
+
 django_heroku.settings(locals())
+

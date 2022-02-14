@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 
+# 
 # Create your models here.
 
 
@@ -66,3 +67,7 @@ class Flight(models.Model):
 
     def __str__(self):
         return f'{self.flight_number}/{self.booster.name}' 
+
+class Photo(models.Model):
+    name = models.CharField(max_length=64)
+    image = CloudinaryField('image')

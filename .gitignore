@@ -1,1 +1,5 @@
 .env
+requirements-copy.txt
+spaceX/settings-copy.py
+*.pyc
+*/__pycache__/*.pyc

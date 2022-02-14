@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from .models import Booster, LaunchComplex, Mission
+from .models import Booster, LaunchComplex, Mission, Photo
 
 # Create your views here.
 
@@ -86,4 +86,10 @@ def missions(req):
     missions = Mission.objects.all()
     context = {"missions" : missions}
     return render(req, 'Falcon9Launches/missions.html', context)
+
+
+def photos(req):
+    print('index.view')
+    context = {'photos' : Photo.objects.all()}
+    return render(req, 'Falcon9Launches/photos.html', context)
 
