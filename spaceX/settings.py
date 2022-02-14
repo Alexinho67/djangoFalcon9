@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import django_heroku
 import dj_database_url
 from pathlib import Path
-from whitenoise.django import DjangoWhiteNoise
 import os
 import cloudinary
 import cloudinary.uploader
@@ -63,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhitenoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'spaceX.urls'
@@ -163,8 +161,6 @@ if DEBUG:
    ]
 else:
        STATIC_ROOT = os.path.join(BASE_DIR,'static')
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 print(f'Setting.py: MEDIA_ROOT:{MEDIA_ROOT}')
