@@ -35,7 +35,7 @@ DUMMYKEY  = str(os.getenv('DUMMY_KEY'))
 print(f'setting.py: the value of DUMMYKEY from .env is: {DUMMYKEY}')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
