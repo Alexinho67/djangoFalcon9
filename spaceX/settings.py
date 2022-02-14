@@ -89,17 +89,14 @@ WSGI_APPLICATION = 'spaceX.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if (str(os.getenv('ENV'))):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+
+DATABASES = {
+    'default': dj_database_url.config(), 
+    'defaultDev': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else: #Production
-    DATABASES = {
-        'default': dj_database_url.config(),
-    }
+}
 
 
 # Password validation
@@ -157,8 +154,14 @@ cloudinary.config(
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
 STATIC_URL = '/static/'
+if DEBUG:
+       STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static'),
+   ]
+else:
+       STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 print(f'Setting.py: MEDIA_ROOT:{MEDIA_ROOT}')
