@@ -29,8 +29,7 @@ print(f'Setting.py: BASE_DIR: {BASE_DIR}')
 # SECURITY WARNING: keep the secret key used in production secret!
 
 secret_key_temp = os.environ['SECRET_KEY']
-print(f'settings: your secret key is {secret_key_temp}')
-SECRET_KEY = 'django-insecure-m2pd%=blf)6uzwd8+mf!qs842r7-dqbrz+(o*51qo+tmfmoa^7'
+SECRET_KEY = secret_key_temp
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
