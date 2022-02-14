@@ -13,6 +13,9 @@ import django_heroku
 import dj_database_url
 from pathlib import Path
 import os
+import cloudinary
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +25,11 @@ print(f'Setting.py: BASE_DIR: {BASE_DIR}')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m2pd%=blf)6uzwd8+mf!qs842r7-dqbrz+(o*51qo+tmfmoa^7'
+# SECRET_KEY = 'django-insecure-m2pd%=blf)6uzwd8+mf!qs842r7-dqbrz+(o*51qo+tmfmoa^7'
+
+SECRET_KEY  = str(os.getenv('SECRET_KEY'))
+DUMMYKEY  = str(os.getenv('DUMMY_KEY'))
+print(f'setting.py: the value of DUMMYKEY from .env is: {DUMMYKEY}')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +129,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'himfykazc',
+    'API_KEY': str(os.getenv('YOUR_API_KEY')),
+    'API_SECRET': str(os.getenv('YOUR_API_SECRET')),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
 
