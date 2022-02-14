@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
+    # 'cloudinary_storage',
     'django.contrib.staticfiles',
-    'cloudinary',
+    # 'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -145,22 +145,22 @@ USE_TZ = True
 # for k in CLOUDINARY_STORAGE:
 #     print(f'CLOUDINARY_STORAGE: {k}-{CLOUDINARY_STORAGE[k]}')
 
-cloudinary.config( 
-  cloud_name = 'himfykazc',
-  api_key = str(os.getenv('API_KEY')), 
-  api_secret = str(os.getenv('API_SECRET')),
-  secure = True
-)
+# cloudinary.config( 
+#   cloud_name = 'himfykazc',
+#   api_key = str(os.getenv('API_KEY')), 
+#   api_secret = str(os.getenv('API_SECRET')),
+#   secure = True
+# )
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
-if DEBUG:
-       STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, 'static'),
-   ]
-else:
-       STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# if DEBUG:
+#        STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#    ]
+# else:
+#        STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'uploads')
 print(f'Setting.py: MEDIA_ROOT:{MEDIA_ROOT}')
