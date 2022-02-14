@@ -89,13 +89,17 @@ WSGI_APPLICATION = 'spaceX.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(),
-    'defaultDevelop': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if (str(os.getenv('ENV'))):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else: #Production
+    DATABASES = {
+        'default': dj_database_url.config(),
+    }
 
 
 # Password validation
@@ -135,11 +139,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'himfykazc',
-    'API_KEY': str(os.getenv('API_KEY')),
-    'API_SECRET': str(os.getenv('API_SECRET')),
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'himfykazc',
+#     'API_KEY': str(os.getenv('API_KEY')),
+#     'API_SECRET': str(os.getenv('API_SECRET')),
+# }
+
+# for k in CLOUDINARY_STORAGE:
+#     print(f'CLOUDINARY_STORAGE: {k}-{CLOUDINARY_STORAGE[k]}')
 
 cloudinary.config( 
   cloud_name = 'himfykazc',
@@ -147,9 +154,6 @@ cloudinary.config(
   api_secret = str(os.getenv('API_SECRET')),
   secure = True
 )
-
-for k in CLOUDINARY_STORAGE:
-    print(f'CLOUDINARY_STORAGE: {k}-{CLOUDINARY_STORAGE[k]}')
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
