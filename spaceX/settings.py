@@ -27,6 +27,9 @@ print(f'Setting.py: BASE_DIR: {BASE_DIR}')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+secret_key_temp = os.environ['SECRET_KEY']
+print(f'settings: your secret key is {secret_key_temp}')
 SECRET_KEY = 'django-insecure-m2pd%=blf)6uzwd8+mf!qs842r7-dqbrz+(o*51qo+tmfmoa^7'
 
 
@@ -44,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # 'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
 ]
@@ -137,14 +139,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-cloudinary.config( 
-  cloud_name = 'hnyvz0c0n',
-  api_key = '732989989367662', 
-  api_secret = 'FEILpe3jzreCH2xzJxyBroVzFw8',
-)
-
-# CLOUDINARY_URL=cloudinary://732989989367662:FEILpe3jzreCH2xzJxyBroVzFw8@hnyvz0c0n
 
 django_heroku.settings(locals())
 
