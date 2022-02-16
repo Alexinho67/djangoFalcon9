@@ -16,6 +16,8 @@
     </style>
 </head>
 <body>
+    <nav>
+        <a href ="{% url 'index' %}"> Home </a> </nav>
     <main>
         {% block content %}
         {% endblock %}
@@ -23,6 +25,7 @@
         {% endblock  %}
         
     </main>
+    <footer></footer>
     <script src="{% static '/Falcon9Launches/main.js' %}" ></script
 
 </body>

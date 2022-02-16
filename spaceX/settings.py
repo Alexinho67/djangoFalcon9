@@ -139,5 +139,17 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# # if DEBUG == True:
+# CLOUDINARY_URL = os.environ['CLOUDINARY_URL']
+# print(f'...cloudinary url :{CLOUDINARY_URL} ')
+
+# CLOUDINARY_URL = cloudinary://:@
+
+cloudinary.config( 
+  cloud_name = "hnyvz0c0n", 
+  api_key = "732989989367662", 
+  api_secret = "FEILpe3jzreCH2xzJxyBroVzFw8",
+)
+
 django_heroku.settings(locals())
 

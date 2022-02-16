@@ -4,9 +4,6 @@ from cloudinary.models import CloudinaryField
 # 
 # Create your models here.
 
-
-
-
 class Booster(models.Model):
     BOOSTER_STATUS = (
         ('WA','Awaiting assignment'),
@@ -38,7 +35,7 @@ class LaunchSite(models.Model):
 class LaunchComplex(models.Model):
     name = models.CharField(max_length = 64)
     launch_site = models.ForeignKey(LaunchSite, on_delete=models.Case)
-    image = models.ImageField(null = True, upload_to ='uploads/')
+    image = CloudinaryField('image', null = True)
 
     def __str__(self):
         return self.name
@@ -51,6 +48,9 @@ class Mission(models.Model):
     def __str__(self):
         return self.name
 
+    def flight_number(self):
+        return self.flight.number
+
 class Flight(models.Model):
     OUTCOMES = (
         ('F', 'Failure'),
@@ -58,15 +58,15 @@ class Flight(models.Model):
         ('C', 'Cancelled'),
     )
 
-    flight_number = models.IntegerField()
+    number = models.IntegerField()
     date = models.DateField('date of flight')
     booster = models.ForeignKey(Booster, on_delete=models.CASCADE)
     outcome = models.CharField(max_length=1, choices=OUTCOMES)
-    launch_site = models.ForeignKey(LaunchSite, on_delete=models.CASCADE)
+    launch_complex = models.ForeignKey(LaunchComplex, on_delete=models.CASCADE)
     mission = models.OneToOneField(Mission, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.flight_number}/{self.booster.name}' 
+        return f'No:{self.number} - Booster: {self.booster.number  }' 
 
 class Photo(models.Model):
     name = models.CharField(max_length=64)

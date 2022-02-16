@@ -2,23 +2,33 @@
 
 {% block content%}
     
-    <h1>Falcon 9 launch complexes</h1>
+    <h1>Falcon 9 missions</h1>
         {% if missions %}
-            <div >
+            <table class=""> 
             {% for mission in missions  %}
-                <div class=""> <div>
-                    <h3>{{mission.name}}</h3> <br/>
-                </div>
-                {% if  mission.image%}
-                    <img src="{{mission.image.url}}" width="500" > </div>
-                {% endif %}
-                {% endfor %}
-            </div>
+            <tr>
+                <td><strong>Name:</strong> {{mission.name}} </td>
+                <td><strong>Operator:</strong>{{mission.operator}} </td>
+            </tr>
+            {% endfor %}
+        </table>
         {% else %}
             <div> No launch complexes found. </div>
         {% endif %}
-
+    
 {% endblock %}
 
+
+
 {% block form  %}
+    <h3> Create a new mission </h3>
+    <h4> Secret: {{secret_message}} </h4>
+
+    <form action="" method="post" class="createForm">
+        {% csrf_token %}
+         <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Save">
+    </form>
 {% endblock  %}

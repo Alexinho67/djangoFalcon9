@@ -47,3 +47,49 @@ main{
     color: rgb(150, 5, 5);
     border-radius: 2px;
 }
+
+
+.createForm{
+    background-color: #bbb;
+    padding:1em;
+    border:1px solid rgb(48, 48, 48);
+}
+
+.errorlist{
+    list-style: none;
+    background-color: rgb(229 151 151);
+    color: rgb(150, 5, 5);
+}
+
+.flightsLine{
+    font-size: 0.8rem;
+    display:grid;
+    padding:0.4rem;
+    border: 1px solid black;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    column-gap: 0.4rem;
+    margin-bottom: 0.4rem;
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+.flightDataBox{
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #eee;
+}
+
+.flightDataBox > p:first-child{
+    font-weight: 800;
+}
+.flightDataBox > p:last-child{
+    text-align: center;
+}
+
+.flightDataBox > p{
+    padding:0.2rem;
+}
+
+footer{
+    height:100px;
+}

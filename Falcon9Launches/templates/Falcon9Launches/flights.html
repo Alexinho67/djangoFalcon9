@@ -1,0 +1,41 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h1>Falcon 9 flights</h1>
+        {% if flights %}
+            <div >
+            {% for f in flights  %}
+                <div class="flightsLine"> 
+                    <div class="flightDataBox"><p>ID(database)</p>
+                        <p>{{f.id}}</p></div> 
+                    <div class="flightDataBox"><p>Number</p>
+                        <p>{{f.number}}</p></div>
+                    <div class="flightDataBox"><p>Date of flight</p>
+                        <p>{{f.date}}</p></div>
+                    <div class="flightDataBox"><p>Booster</p>
+                        <p>{{f.booster}}</p></div>
+                    <div class="flightDataBox"><p>Outcome</p>
+                        <p>{{f.outcome}}</p></div>
+                    <div class="flightDataBox"><p>Launch complex</p>
+                        <p>{{f.launch_complex}}</p></div>
+                    <div class="flightDataBox"><p>Mission</p>
+                        <p>{{f.mission}}</p></div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div> No flights found. </div>
+        {% endif %}
+{% endblock %}
+
+{% block form  %}
+    <h3> Create a new flight </h3>
+    <form method="post" class="createForm">
+        {% csrf_token %}
+         <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Save">
+    </form>
+{% endblock  %}
