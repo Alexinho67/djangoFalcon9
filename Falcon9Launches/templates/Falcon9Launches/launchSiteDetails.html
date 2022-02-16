@@ -1,0 +1,19 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h2>Details for launch site {{launchSite.name}}</h2>
+    <div>
+        <p><strong>Database id:</strong> {{launchSite.id}}</p>
+        <p><strong>Name:</strong> {{launchSite.name}}</p>
+        <p><strong>State:</strong> {{launchSite.state}}/USA</p>
+        <p><strong>Launch complexes:</strong> </p>
+        <ul>
+            {% for complex in launchSite.launchcomplex_set.all %}
+                 <li><a href="{% url "complexDetails" complex.id %}" >{{complex.name}} </a> </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a class="button cancel" href = "{% url 'launchsites' %}" > All launch sites </a>
+
+{% endblock %}

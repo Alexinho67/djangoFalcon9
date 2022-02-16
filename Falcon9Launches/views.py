@@ -1,12 +1,9 @@
-from http.client import HTTPResponse
-from django import forms
 from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import  JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from .models import Booster, LaunchComplex, Mission, Photo, Flight
-from django.forms import widgets, ModelForm, ValidationError as myValidationError
-from django.views.generic import CreateView, DeleteView, FormView,  UpdateView
+from .models import Booster, LaunchComplex, LaunchSite, Mission, Photo, Flight
+from .forms import BoosterForm, FlightCreateForm, MissionCreateForm
 
 # Create your views here.
 
@@ -42,17 +39,40 @@ def boosters(req):
     return render(req, 'Falcon9Launches/boosters.html', context)
 
 
-def boosterDelete(req, id_booster):
-    print(f'boosterDelete')
-    if req.method == 'DELETE':
-        print(f'deleting booster #{id_booster}')
-        booster = get_object_or_404(Booster, pk = id_booster)
+def boosterDetails(req, booster_id):
+    print(f'@views.boosterDetails. Booster_id:{booster_id}')
+    booster = get_object_or_404(Booster, pk = booster_id)
+    context ={ 'booster': booster}
+    return render(req, 'Falcon9Launches/boosterDetails.html' , context)
+    
+def boosterEdit(req, booster_id):
+    print(f'@views.boosterEdit. Booster_id:{booster_id}')
+    booster = get_object_or_404(Booster, pk = booster_id)
+    if (req.method == 'POST') :
+        form = BoosterForm(req.POST, instance=booster)
+        if form.is_valid():
+            form.save()
+            path = reverse('boosterDetails',args=[booster_id])
+            print(f'@EditBooster/POST: redirect to: {path}')
+            return redirect(path)
+            # return render(req, 'Falcon9Launches/boosterDetails.html' , context)
+
+    form = BoosterForm(instance= booster)
+    context ={ 'booster': booster, 'form' : form}
+    return render(req, 'Falcon9Launches/boosterEdit.html' , context)
+
+
+
+def boosterDelete(req, booster_id):
+    booster = get_object_or_404(Booster, pk = booster_id)
+    context = {"booster": booster}
+    if ((req.method == 'POST') and (req.POST['confirm'] == 'yes')):
+        print(f'@views.boosterDelete: Delete booster #{booster_id}')
         booster.delete()
-        # return redirect(reverse('boosters'))
-        pathForRedirect = reverse('boosters')
-        # print(f'Redirecting user to path: "{pathForRedirect}"')
-        return JsonResponse({'success': 'true'})
-        
+        return redirect(reverse('boosters'))
+    else:
+        return render(req, 'Falcon9Launches/boosterDelete.html', context)
+
 ## LAUNCH COMPLEXES 
 
 
@@ -60,6 +80,27 @@ def launchcomplexes(req):
     complexes = LaunchComplex.objects.all()
     context = {"complexes" : complexes}
     return render(req, 'Falcon9Launches/launchcomplexes.html', context)
+    
+def complexDetails(req, complex_id):
+    print(f'@views.complexDetails. Complex_id:{complex_id}')
+    complex = get_object_or_404(LaunchComplex, pk = complex_id)
+    context ={ 'complex': complex}
+    return render(req, 'Falcon9Launches/launchcomplexDetails.html' , context)
+    
+
+def launchsites(req):
+    sites = LaunchSite.objects.all()
+    context = {"sites" : sites}
+    return render(req, 'Falcon9Launches/launchsites.html', context)
+
+def launchSiteDetails(req, site_id):
+    print(f'@views.launchSiteDetails. Site_id:{site_id}')
+    launchSite = get_object_or_404(LaunchSite, pk = site_id)
+    context ={ 'launchSite': launchSite}
+    return render(req, 'Falcon9Launches/launchSiteDetails.html' , context)
+    
+
+    
 
 ## MISSIONS ## 
 
@@ -80,26 +121,7 @@ def missions(req):
         'form': formMission}
     return render(req, 'Falcon9Launches/missions.html', context)
 
-class MissionCreateForm(ModelForm):
-    class Meta:
-        model = Mission
-        fields = '__all__'
 
-    def clean_name(self,*args, **kwargs):
-        print('calling "clean_name" method of "MissionCreateForm"')
-        name = self.cleaned_data.get('name')
-        if (len(name)<=3):
-            raise myValidationError('Name is too short!')
-        # name += 'ALEX'
-        return name    
-    
-    def clean_operator(self,*args, **kwargs):
-        print('calling "clean_operator" method of "MissionCreateForm"')
-        operator = self.cleaned_data.get('operator')
-        if (len(operator)<=3):
-            raise myValidationError('Operator is too short!')
-        # name += 'ALEX'
-        return operator
 
 def flights(req):
 
@@ -115,7 +137,7 @@ def flights(req):
     else:
         # form = FlightCreateForm(initial={'number':999,'date':'aaa','booster': '42' })
         pass
-    
+
     form = FlightCreateForm()
     form.fields['mission'].queryset = Mission.objects.filter(flight__isnull=True)
 
@@ -123,13 +145,13 @@ def flights(req):
     context = {"flights" : flights,  'form': form}
     return render(req, 'Falcon9Launches/flights.html', context)
 
-class FlightCreateForm(ModelForm):
-    class Meta:
-        model = Flight
-        fields = '__all__'
-        widgets = {
-            'date': widgets.DateInput(attrs={'type': 'date'})
-        }
+
+def flightDetails(req, flight_id):
+    print(f'@views.flightDetails. Flight_id:{flight_id}')
+    flight = get_object_or_404(Flight, pk = flight_id)
+    context ={ 'flight': flight}
+    return render(req, 'Falcon9Launches/flightDetails.html' , context)
+    
 
 
     

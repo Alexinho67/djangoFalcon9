@@ -6,13 +6,15 @@
         {% if complexes %}
             <div >
             {% for complex in complexes  %}
-                <div class="launchComplex"> <div>
-                    <h3>{{complex.name}}</h3> <br/>
-                    <p><strong>Launch site:</strong> {{complex.launch_site.name}}</p>
+                <div class="launchComplex"> 
+                    <div class="complexInfoContainer">
+                        <div><h3>{{complex.name}}</h3> <a href="{% url "complexDetails" complex.id %}" > (Details) </a></div>
+                        <p><strong>Launch site:</strong> <a href="{% url "launchSiteDetails" complex.launch_site.id %}" >{{complex.launch_site.name}}</a></p>
+                    </div>
+                    {% if complex.image %}
+                        <div class="imageContainer"><img class="thumbnail" src="{{complex.image.url}}"  > </div> 
+                    {% endif %}
                 </div>
-                {% if  complex.image%}
-                    <img src="{{complex.image.url}}" width="500" > </div>
-                {% endif %}
                 {% endfor %}
             </div>
         {% else %}

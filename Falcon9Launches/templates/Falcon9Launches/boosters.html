@@ -7,8 +7,17 @@
             <div class="boosterList" >
           
             {% for b in boosters  %}{% with status=b.get_current_status_display  %}
-                <div class="boosterLine"> <span><strong>Number: </strong>{{b.number}} - <strong>Status: </strong>{{status}}</span> 
-                    <button class="buttonDelete" data-id={{b.id}} >Delete </button></div>
+                <div class="boosterLine"> 
+                    <span>
+                        <strong>Number: </strong>{{b.number}} -
+                        <strong>Status: </strong>{{status}} - 
+                        <strong>Total flights: </strong> {{b.flight_set.all|length}}
+                    </span> 
+                    <div style="display:inline-flex">
+                        <a href="{% url 'boosterDetails' b.id %}"> Details </a> 
+                        {% comment %} <button class="buttonDelete" data-id={{b.id}}>Delete </button> {% endcomment %}
+                    </div>
+                </div>
                 {% endwith %}{% endfor %}
             </div>
         {% else %}

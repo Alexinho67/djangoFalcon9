@@ -1,0 +1,11 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    <h3>Are you sure you want to delete booster {{booster.number}} ? </h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="confirm" value="yes" >
+        <input class="button delete"  type="submit" value="Yes, delete" >
+        <a href="{% url "boosterDetails" booster.id %}" class="button cancel" > No, go back. </a>
+        </form>
+{% endblock %}

@@ -4,27 +4,82 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+nav{
+    background-color: #222;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+nav > a{
+    color: #ddd;
+    font-weight: 700;
+    text-decoration: none;
+    padding:5px;
+    border:1px solid #ddd;
+    border-radius: 5px;
+}
 main{
     margin:0 auto;
     width: fit-content;
     min-width: 60vh;
 }
 
-.boosterList>div{
-    height: 2em;
-    width: 500px;
-    padding:3px;
-}
-.boosterList>div:nth-child(even){
-    background-color:#aaa;
-}
-.boosterList>div:nth-child(odd){
-    background-color:#bbb;
-}
 .boosterLine{
     display:flex;
     justify-content: space-between;
+    height: 2em;
+    width: 620px;
+    padding:3px;
+
 }
+
+.boosterLine a{
+    text-decoration: none;
+    color: black;
+    background-color: #ddd;
+    border: 1px solid black;
+    padding:3px;
+    font-size:0.8rem;
+    line-height: 1.5rem;
+    margin-right: 0.25rem;
+}
+
+.boosterLine:nth-child(even){
+    background-color:#aaa;
+}
+.boosterLine:nth-child(odd){
+    background-color:#bbb;
+}
+
+.buttonDelete{
+    color: black;
+    background-color: #ddd;
+    height: 100%;
+    border: 1px solid black;
+    padding:3px;
+    margin:0;
+    font-size:0.8rem;
+    font-family: inherit;
+}
+
+.flightsList{
+    margin:0.5rem 1rem;
+}
+
+.flightLine{
+    padding:2px 10px 2px 2px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.flightLine:nth-child(even){
+    background-color:#aaa;
+}
+.flightLine:nth-child(odd){
+    background-color:#bbb;
+}
+
 
 .launchComplex{
     width: 50vw;
@@ -36,8 +91,28 @@ main{
     background-color: #aaa;
 }
 
-.launchComplex h3,p{
-    margin:0;
+.launchComplex h3{
+    display: inline;
+}
+
+.launchComplex a{
+    text-decoration: none;
+    color: inherit
+}
+
+.launchComplex>.imageContainer{
+    width:100px;
+}
+
+.launchComplex>.complexInfoContainer{
+    background-color:#aaa;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.launchComplex .thumbnail{
+    width:100%;
 }
 
 .errorValidation{
@@ -92,4 +167,40 @@ main{
 
 footer{
     height:100px;
+}
+
+.button{
+    display: inline-block;
+    font-family: inherit;
+    font-size: 1rem;
+    text-decoration: none;
+    padding:5px;
+    border:1px solid #222;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: .2rem;
+}
+
+
+
+.button.delete{
+    background-color: rgb(148, 16, 16);
+    color:white;
+}
+
+
+.button.cancel{
+    background-color: rgb(31, 27, 27);
+    color:white;
+} 
+
+.button.details{
+    background-color: rgb(75, 75, 75);
+    color:white;
+}
+
+.button.edit{
+    background-color: rgb(28, 9, 80);
+    color:white;
 }

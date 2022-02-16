@@ -17,7 +17,8 @@
 </head>
 <body>
     <nav>
-        <a href ="{% url 'index' %}"> Home </a> </nav>
+        {% include 'Falcon9Launches/navbar.html' %}
+    </nav>
     <main>
         {% block content %}
         {% endblock %}

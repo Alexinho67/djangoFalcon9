@@ -1,0 +1,14 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+{% endblock %}
+
+{% block form  %}
+    <h2>Edit booster #{{booster.number}} </h2>
+    <form method="post" class="createForm">
+        {% csrf_token %}
+            {{form.as_p}}
+        <input type="submit" value="Save" />
+    </form>
+{% endblock  %}

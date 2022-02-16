@@ -35,10 +35,14 @@ class LaunchSite(models.Model):
 class LaunchComplex(models.Model):
     name = models.CharField(max_length = 64)
     launch_site = models.ForeignKey(LaunchSite, on_delete=models.Case)
-    image = CloudinaryField('image', null = True)
+    image = CloudinaryField('image', null = True, blank = True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        # Gives the proper plural name for admin
+        verbose_name_plural = "Launch complexes"
     
 class Mission(models.Model):
     name = models.CharField(max_length = 256)

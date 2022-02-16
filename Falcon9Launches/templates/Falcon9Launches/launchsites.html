@@ -1,0 +1,16 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h1>Falcon 9 launch sites</h1>
+        {% if sites %}
+            <div >
+            {% for site in sites  %}
+                <a href="{% url "launchSiteDetails" site.id %}" class="button details" >{{site.name}}</h3> </a> <br/>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div> No launch site found. </div>
+        {% endif %}
+
+{% endblock %}

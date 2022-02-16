@@ -1,0 +1,31 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h2>Details for booster {{booster.number}}</h2>
+    <div>
+        <p><strong>Database id:</strong> {{booster.id}}</p>
+        <p><strong>Current status:</strong> {{booster.get_current_status_display}}</p>
+        <p><strong>Total number of flights:</strong> {{booster.flight_set.all|length}}</p>
+        <p> <strong>Flight details:</strong> </p>
+        <div class="flightsList" >
+            {% for f in booster.flight_set.all  %}
+                <div class="flightLine"> 
+                    <span>
+                        <strong>Number: </strong>{{f.number}} -
+                        <strong>Date: </strong>{{f.date}} - 
+                        <strong>Mission: </strong> {{f.mission.name}}
+                    </span>          
+                    <div>
+                        <a href="{% url 'flightDetails' f.id %}"> Details </a>
+                    </div>
+
+                </div>       
+            {% endfor %}
+        </div>
+    </div>
+    <a class="button edit" href = "{% url 'boosterEdit' booster.id %}" > Edit </a> 
+    <a class="button delete" href = "{% url 'boosterDelete' booster.id %}" > Delete </a>
+    <a class="button cancel" href = "{% url 'boosters' %}" > Back </a>
+
+{% endblock %}

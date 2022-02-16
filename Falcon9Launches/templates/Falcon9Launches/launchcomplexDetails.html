@@ -1,0 +1,18 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h2>Details for launch complex {{complex.name}}</h2>
+    <div>
+        <p><strong>Database id:</strong> {{complex.id}}</p>
+        <p><strong>Name:</strong> {{complex.name}}</p>
+        <p><strong>Launch site:</strong> <a href="{% url "launchSiteDetails" complex.launch_site.id %}" >{{complex.launch_site.name}} </a></p>
+        {% if  complex.image%}
+        <img src="{{complex.image.url}}" width="400" > </div>
+    {% endif %}
+    </div>
+    </div>
+    
+    <a class="button cancel" href = "{% url 'launchcomplexes' %}" > Show all launch complexes </a>
+
+{% endblock %}
