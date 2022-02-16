@@ -1,0 +1,11 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    <p>Are you sure you want to delete flight <strong>{{flight.number}}</strong> ? </p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="confirm" value="yes" >
+        <input class="button delete"  type="submit" value="Yes, delete" >
+        <a href="{% url "flightDetails" flight.id %}" class="button cancel" > No, go back. </a>
+        </form>
+{% endblock %}

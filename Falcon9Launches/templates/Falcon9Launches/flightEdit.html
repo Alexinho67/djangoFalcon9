@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block form  %}
-    <h2>Edit booster #{{booster.number}} </h2>
+    <h2>Edit flight #{{flight.number}} </h2>
     <form method="post" class="createForm">
         {% csrf_token %}
             {{form.as_p}}
         <input class="button save" type="submit" value="Save" />
-        <a class="button cancel" href="{% url "boosterDetails" booster.id %}"> Back </a>
+        <a class="button cancel" href="{% url "flightDetails" flight.id %}"> Back </a>
     </form>
 {% endblock  %}

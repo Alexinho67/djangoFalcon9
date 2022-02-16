@@ -4,13 +4,27 @@
     
     <h1>Falcon 9 missions</h1>
         {% if missions %}
-            <table class=""> 
+            <table class="flightsTable"> <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Operator</td>
+                    <td>Flight</td>
+                    <td>Booster</td>
+                    <td>Outcome</td>
+                    <td>Details</td>
+                </tr>
+            </thead><tbody>
             {% for mission in missions  %}
             <tr>
-                <td><strong>Name:</strong> {{mission.name}} </td>
-                <td><strong>Operator:</strong>{{mission.operator}} </td>
+                <td>{{mission.name}} </td>
+                <td>{{mission.operator}} </td>
+                <td>{{mission.flight.number}} </td>
+                <td>{{mission.flight.booster.number}} </td>
+                <td>{{mission.flight.get_outcome_display}} </td>
+                <td><a href="{% url "missionDetails" mission.id%}">Details </a></td>
             </tr>
-            {% endfor %}
+            {% endfor %} 
+            </tbody>    
         </table>
         {% else %}
             <div> No launch complexes found. </div>

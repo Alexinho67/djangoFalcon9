@@ -24,13 +24,16 @@ class MissionCreateForm(ModelForm):
 
 
 class FlightCreateForm(ModelForm):
+
+    def __init__(self,*args,**kwargs):
+        super (FlightCreateForm,self ).__init__(*args,**kwargs) # populates the post
+        self.fields['mission'].queryset = Mission.objects.filter(flight__isnull=True)
     class Meta:
         model = Flight
         fields = '__all__'
         widgets = {
             'date': widgets.DateInput(attrs={'type': 'date'})
         }
-
 class BoosterForm(ModelForm):
 
     class Meta:

@@ -12,8 +12,8 @@
         <p><strong>Mission:</strong> <a href="" />{{flight.mission.name}}</a></p>
         </div>
     </div>
-    {% comment %} <a class="button edit" href = "{% url 'boosterEdit' booster.id %}" > Edit </a> 
-    <a class="button delete" href = "{% url 'boosterDelete' booster.id %}" > Delete </a>
-    <a class="button cancel" href = "{% url 'boosters' %}" > Back </a> {% endcomment %}
+    <a class="button edit" href = "{% url 'flightEdit' flight.id%}" > Edit </a> 
+    <a class="button delete" href = "{% url 'flightDelete' flight.id %}" > Delete </a>
+    <a class="button cancel" href = "{% url 'flights' %}" > Show all flights </a>
 
 {% endblock %}

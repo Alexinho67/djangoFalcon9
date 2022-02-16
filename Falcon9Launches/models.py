@@ -47,6 +47,7 @@ class LaunchComplex(models.Model):
 class Mission(models.Model):
     name = models.CharField(max_length = 256)
     operator = models.CharField(max_length = 256)
+    wikiLink = models.URLField(null = True)
     # image = CloudinaryField('image', null = True)
 
     def __str__(self):

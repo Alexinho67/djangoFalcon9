@@ -61,8 +61,6 @@ def boosterEdit(req, booster_id):
     context ={ 'booster': booster, 'form' : form}
     return render(req, 'Falcon9Launches/boosterEdit.html' , context)
 
-
-
 def boosterDelete(req, booster_id):
     booster = get_object_or_404(Booster, pk = booster_id)
     context = {"booster": booster}
@@ -74,7 +72,6 @@ def boosterDelete(req, booster_id):
         return render(req, 'Falcon9Launches/boosterDelete.html', context)
 
 ## LAUNCH COMPLEXES 
-
 
 def launchcomplexes(req):
     complexes = LaunchComplex.objects.all()
@@ -121,7 +118,38 @@ def missions(req):
         'form': formMission}
     return render(req, 'Falcon9Launches/missions.html', context)
 
+def missionDetails(req, mission_id):
+    mission = get_object_or_404(Mission, pk = mission_id)
 
+    context = {"mission": mission}
+    return render(req, 'Falcon9Launches/missionDetails.html', context)
+
+def missionEdit(req, mission_id):
+    print(f'@views.missionEdit. Mission_id:{mission_id}. Method:{req.method}')
+    mission = get_object_or_404(mission, pk = mission_id)
+    if req.method =='POST':
+        pass
+        form = MissionCreateForm(req.POST, instance=mission)
+        if form.is_valid():
+            form.save()
+            ## return to mission details
+            return redirect(reverse('missionDetails',args=[mission.id]))
+        else:
+            print('....form is not valid.Errors: {form.errors}')
+            context ={ 'mission': mission, 'form':form}
+            return render(req, 'Falcon9Launches/missionEdit.html' , context)
+    form = MissionCreateForm(instance=mission)
+    context ={ 'mission': mission}
+    return render(req, 'Falcon9Launches/missionEdit.html' , context)
+
+def missionDelete(req, mission_id):
+    print(f'@views.missionDelete. mission_id:{mission_id}. Method: {req.method}')
+    mission = get_object_or_404(Mission, pk = mission_id)
+    if (req.method == 'POST') and (req.POST['confirm'] == 'yes'):
+        mission.delete()
+        return redirect(reverse('missions'))
+    context ={'mission': mission}
+    return render(req, 'Falcon9Launches/missionDelete.html' , context)
 
 def flights(req):
 
@@ -139,8 +167,6 @@ def flights(req):
         pass
 
     form = FlightCreateForm()
-    form.fields['mission'].queryset = Mission.objects.filter(flight__isnull=True)
-
     flights = Flight.objects.all()
     context = {"flights" : flights,  'form': form}
     return render(req, 'Falcon9Launches/flights.html', context)
@@ -152,6 +178,31 @@ def flightDetails(req, flight_id):
     context ={ 'flight': flight}
     return render(req, 'Falcon9Launches/flightDetails.html' , context)
     
+def flightEdit(req, flight_id):
+    print(f'@views.flightEdit. Flight_id:{flight_id}. Method:{req.method}')
+    flight = get_object_or_404(Flight, pk = flight_id)
+    if req.method =='POST':
+        form = FlightCreateForm(req.POST, instance=flight)
+        if form.is_valid():
+            form.save()
+            ## return to flight details
+            return redirect(reverse('flightDetails',args=[flight.id]))
+        else:
+            print('....form is not valid.Errors: {form.errors}')
+            context ={ 'flight': flight, 'form':form}
+            return render(req, 'Falcon9Launches/flightEdit.html' , context)
+    form = FlightCreateForm(instance=flight)
+    context ={ 'flight': flight, 'form':form}
+    return render(req, 'Falcon9Launches/flightEdit.html' , context)
+
+def flightDelete(req, flight_id):
+    print(f'@views.flightDelete. Flight_id:{flight_id}. Method: {req.method}')
+    flight = get_object_or_404(Flight, pk = flight_id)
+    if (req.method == 'POST') and (req.POST['confirm'] == 'yes'):
+        flight.delete()
+        return redirect(reverse('flights'))
+    context ={'flight': flight}
+    return render(req, 'Falcon9Launches/flightDelete.html' , context)
 
 
     

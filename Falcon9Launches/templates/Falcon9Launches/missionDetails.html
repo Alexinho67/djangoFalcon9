@@ -1,0 +1,27 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+    <h2>Details for mission  "{{mission.name|upper}}"</h2>
+    <div>
+        <p><strong>Database id:</strong> {{mission.id}}</p>
+        <p><strong>Name:</strong> {{mission.name}}</p>
+        <p><strong>Operator:</strong> {{mission.operator}}</p>
+        {% if mission.wikiLink %}
+        <p><strong>WikiLink :</strong> {{mission.wikiLink}}</p>
+        {% endif %}
+        <p><strong>Flight:</strong> 
+            {% if mission.flight %}
+                {{mission.flight.number}}
+            {% else %}
+                no flight assigned yet
+            {% endif %}
+        
+        </p>
+
+    </div>
+    <a class="button edit" href = "{% url 'missionEdit' mission.id%}" > Edit </a> 
+    <a class="button delete" href = "{% url 'missionDelete' mission.id %}" > Delete </a>
+    <a class="button cancel" href = "{% url 'missions' %}" > Show all missions </a>
+
+{% endblock %}
