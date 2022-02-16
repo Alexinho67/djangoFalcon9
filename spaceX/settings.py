@@ -139,10 +139,10 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-cloudinary.config( 
-  cloud_name = os.environ['CLOUD_name'],
-  api_key = os.environ['CLOUD_api_key'],
-  api_secret = os.environ['CLOUD_api_secret']
-)
+# cloudinary.config( 
+#   cloud_name = os.environ['CLOUD_name'],
+#   api_key = os.environ['CLOUD_api_key'],
+#   api_secret = os.environ['CLOUD_api_secret']
+# )
 
 django_heroku.settings(locals())
