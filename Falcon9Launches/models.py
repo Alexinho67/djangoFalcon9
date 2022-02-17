@@ -72,7 +72,3 @@ class Flight(models.Model):
 
     def __str__(self):
         return f'No:{self.number} - Booster: {self.booster.number  }' 
-
-class Photo(models.Model):
-    name = models.CharField(max_length=64)
-    image = CloudinaryField('image')

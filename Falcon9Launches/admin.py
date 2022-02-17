@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Booster, Flight,LaunchComplex, LaunchSite , Mission ,  Photo
+from .models import Booster, Flight,LaunchComplex, LaunchSite , Mission 
 # Register your models here.
 
 class LaunchComplexAdmin(admin.ModelAdmin):
@@ -16,7 +16,6 @@ class FlightAdmin(admin.ModelAdmin):
             kwargs["queryset"] = Mission.objects.filter(flight__isnull=True)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
-admin.site.register(Photo)
 admin.site.register(Booster)
 admin.site.register(Flight, FlightAdmin)
 admin.site.register(LaunchComplex, LaunchComplexAdmin)

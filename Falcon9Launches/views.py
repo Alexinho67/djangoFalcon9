@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.http import  JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from .models import Booster, LaunchComplex, LaunchSite, Mission, Photo, Flight
+from .models import Booster, LaunchComplex, LaunchSite, Mission, Flight
 from .forms import BoosterForm, FlightCreateForm, MissionCreateForm
 
 # Create your views here.
@@ -204,12 +204,4 @@ def flightDelete(req, flight_id):
     context ={'flight': flight}
     return render(req, 'Falcon9Launches/flightDelete.html' , context)
 
-
-    
-
-
-def photos(req):
-    print('index.view')
-    context = {'photos' : Photo.objects.all()}
-    return render(req, 'Falcon9Launches/photos.html', context)
 
