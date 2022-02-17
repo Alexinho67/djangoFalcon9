@@ -1,0 +1,15 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    
+{% endblock %}
+
+{% block form  %}
+    <h2>Edit mission #{{mission.name}} </h2>
+    <form method="post" class="createForm">
+        {% csrf_token %}
+            {{form.as_p}}
+        <input class="button save" type="submit" value="Save" />
+        <a class="button cancel" href="{% url "missionDetails" mission.id %}"> Back </a>
+    </form>
+{% endblock  %}

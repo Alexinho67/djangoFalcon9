@@ -138,8 +138,8 @@ def missionEdit(req, mission_id):
             print('....form is not valid.Errors: {form.errors}')
             context ={ 'mission': mission, 'form':form}
             return render(req, 'Falcon9Launches/missionEdit.html' , context)
-    form = MissionCreateForm(instance=mission)
-    context ={ 'mission': mission}
+    form = MissionCreateForm(instance=mission, use_required_attribute=False)
+    context ={ 'mission': mission, "form":form }
     return render(req, 'Falcon9Launches/missionEdit.html' , context)
 
 def missionDelete(req, mission_id):
