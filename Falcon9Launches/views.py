@@ -126,7 +126,7 @@ def missionDetails(req, mission_id):
 
 def missionEdit(req, mission_id):
     print(f'@views.missionEdit. Mission_id:{mission_id}. Method:{req.method}')
-    mission = get_object_or_404(mission, pk = mission_id)
+    mission = get_object_or_404(Mission, pk = mission_id)
     if req.method =='POST':
         pass
         form = MissionCreateForm(req.POST, instance=mission)
