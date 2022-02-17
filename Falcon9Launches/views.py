@@ -167,7 +167,7 @@ def flights(req):
         pass
 
     form = FlightCreateForm()
-    flights = Flight.objects.all()
+    flights = Flight.objects.all().order_by('date')
     context = {"flights" : flights,  'form': form}
     return render(req, 'Falcon9Launches/flights.html', context)
 
