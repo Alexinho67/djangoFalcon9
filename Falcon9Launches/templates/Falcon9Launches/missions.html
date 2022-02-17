@@ -18,10 +18,16 @@
             <tr>
                 <td>{{mission.name}} </td>
                 <td>{{mission.operator}} </td>
-                <td><a href="">{{mission.flight.number}} </a></td>
-                <td><a href="{% url "boosterDetails" mission.flight.booster.id %}">{{mission.flight.booster.number}}</a> </td>
-                <td>{{mission.flight.get_outcome_display}} </td>
-                <td><a href="{% url "missionDetails" mission.id%}">Details </a></td>
+                {% if {{mission.flight}} %}
+                    <td><a href="{% url "flightDetails" mission.flight.id %}">{{mission.flight.number}} </a></td>
+                    <td><a href="{% url "boosterDetails" mission.flight.booster.id %}">{{mission.flight.booster.number}}</a> </td>
+                    <td>{{mission.flight.get_outcome_display}} </td>
+                {% else %}
+                    <td> No flight</td>
+                    <td> assigned </td>
+                    <td> yet.</td>
+                {% endif %}
+                <td><a href="{% url "missionDetails" mission.id %}">Details </a></td>
             </tr>
             {% endfor %} 
             </tbody>    
