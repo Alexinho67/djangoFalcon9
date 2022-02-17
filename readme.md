@@ -4,6 +4,7 @@
 **See app on https://djangofalcon9.herokuapp.com/**
 
 Project includes:
+ - user authentication (only registered users can edit or delete boosters,flights and missions)
  - usage of relations: 
    - ManyToOne (e.g. booster reused for different flights)
    - OneToOne (e.g. each flight is assigned to one unique mission)

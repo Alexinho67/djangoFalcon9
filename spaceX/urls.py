@@ -21,6 +21,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Falcon9Launches.urls')),
-    
+    path('accounts/', include('django.contrib.auth.urls')), # new   
 ] 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django.forms import widgets, ModelForm, ValidationError
 from .models import Booster, Mission, Flight
-
+from django.contrib.auth.models import User
 class MissionCreateForm(ModelForm):
     class Meta:
         model = Mission
@@ -39,3 +39,10 @@ class BoosterForm(ModelForm):
     class Meta:
         model= Booster
         fields = '__all__'
+
+
+class MyUserRegistration(ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username','password']

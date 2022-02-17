@@ -1,0 +1,10 @@
+{% extends "Falcon9Launches/layout.html" %}
+
+{% block content%}
+    <h1>Login</h1>
+    <form>
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" >
+    </form>
+{% endblock %}

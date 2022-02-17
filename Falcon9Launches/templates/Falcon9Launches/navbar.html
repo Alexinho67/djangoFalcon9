@@ -5,3 +5,16 @@
 <a href="{%url 'boosters' %}" > Boosters </a>
 <a href="{%url 'launchsites' %}" > Launch sites </a>
 <a href="{%url 'launchcomplexes' %}" > Launch complexes </a>
+{% if  request.user.is_authenticated %}
+    <div style="color:white">Logged in as: {{request.user.username}}
+        <a href="{% url "logout" %}" >Logout </a> 
+    </div>
+{% else %}
+    <div>
+        <a href="{%url 'register' %}" > Register </a>
+        <a href="{% url 'login' %}"> Login </a> 
+    </div>        
+{% endif %}
+
+
+

@@ -19,4 +19,7 @@ urlpatterns = [
     path('flights/<int:flight_id>', views.flightDetails, name="flightDetails"),
     path('flights/<int:flight_id>/edit', views.flightEdit, name="flightEdit"),
     path('flights/<int:flight_id>/delete', views.flightDelete, name="flightDelete"),
+    # path('login', views.login, name="mylogin"),
+    # path('logout', views.logout, name="logout"),
+    path('register', views.register, name="register"),
 ]   

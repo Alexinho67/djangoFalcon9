@@ -12,8 +12,12 @@
         <p><strong>Mission:</strong> <a href="{% url "missionDetails" flight.mission.id %}" />{{flight.mission.name}}</a></p>
         </div>
     </div>
-    <a class="button edit" href = "{% url 'flightEdit' flight.id%}" > Edit </a> 
-    <a class="button delete" href = "{% url 'flightDelete' flight.id %}" > Delete </a>
+    {% if  request.user.is_authenticated %}
+        <a class="button edit" href = "{% url 'flightEdit' flight.id%}" > Edit </a> 
+        <a class="button delete" href = "{% url 'flightDelete' flight.id %}" > Delete </a>
+    {% else %}
+        <p> Log in to edit or delete this flight. </p>    
+    {% endif %}
     <a class="button cancel" href = "{% url 'flights' %}" > Show all flights </a>
 
 {% endblock %}

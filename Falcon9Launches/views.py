@@ -3,7 +3,9 @@ from django.http import  JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from .models import Booster, LaunchComplex, LaunchSite, Mission, Flight
-from .forms import BoosterForm, FlightCreateForm, MissionCreateForm
+from .forms import BoosterForm, FlightCreateForm, MissionCreateForm, MyUserRegistration
+from django.contrib.auth.forms import UserCreationForm
+
 
 # Create your views here.
 
@@ -48,7 +50,9 @@ def boosterDetails(req, booster_id):
 def boosterEdit(req, booster_id):
     print(f'@views.boosterEdit. Booster_id:{booster_id}')
     booster = get_object_or_404(Booster, pk = booster_id)
-    if (req.method == 'POST') :
+    if not req.user.is_authenticated:
+        return redirect(reverse('login'))
+    if (req.method == 'POST'):
         form = BoosterForm(req.POST, instance=booster)
         if form.is_valid():
             form.save()
@@ -62,6 +66,8 @@ def boosterEdit(req, booster_id):
     return render(req, 'Falcon9Launches/boosterEdit.html' , context)
 
 def boosterDelete(req, booster_id):
+    if not req.user.is_authenticated:
+        return redirect(reverse('login'))
     booster = get_object_or_404(Booster, pk = booster_id)
     context = {"booster": booster}
     if ((req.method == 'POST') and (req.POST['confirm'] == 'yes')):
@@ -125,6 +131,8 @@ def missionDetails(req, mission_id):
     return render(req, 'Falcon9Launches/missionDetails.html', context)
 
 def missionEdit(req, mission_id):
+    if not req.user.is_authenticated:
+        return redirect(reverse('login'))
     print(f'@views.missionEdit. Mission_id:{mission_id}. Method:{req.method}')
     mission = get_object_or_404(Mission, pk = mission_id)
     if req.method =='POST':
@@ -143,6 +151,8 @@ def missionEdit(req, mission_id):
     return render(req, 'Falcon9Launches/missionEdit.html' , context)
 
 def missionDelete(req, mission_id):
+    if not req.user.is_authenticated:
+        return redirect(reverse('login'))
     print(f'@views.missionDelete. mission_id:{mission_id}. Method: {req.method}')
     mission = get_object_or_404(Mission, pk = mission_id)
     if (req.method == 'POST') and (req.POST['confirm'] == 'yes'):
@@ -179,6 +189,8 @@ def flightDetails(req, flight_id):
     return render(req, 'Falcon9Launches/flightDetails.html' , context)
     
 def flightEdit(req, flight_id):
+    if not req.user.is_authenticated:
+        return redirect(reverse('login'))
     print(f'@views.flightEdit. Flight_id:{flight_id}. Method:{req.method}')
     flight = get_object_or_404(Flight, pk = flight_id)
     if req.method =='POST':
@@ -196,6 +208,8 @@ def flightEdit(req, flight_id):
     return render(req, 'Falcon9Launches/flightEdit.html' , context)
 
 def flightDelete(req, flight_id):
+    if not req.user.is_authenticated:
+        return redirect(reverse('login'))
     print(f'@views.flightDelete. Flight_id:{flight_id}. Method: {req.method}')
     flight = get_object_or_404(Flight, pk = flight_id)
     if (req.method == 'POST') and (req.POST['confirm'] == 'yes'):
@@ -205,3 +219,19 @@ def flightDelete(req, flight_id):
     return render(req, 'Falcon9Launches/flightDelete.html' , context)
 
 
+def login(req):
+    if req.method == 'POST':
+        return redirect(reverse('login'))
+    context = {"form": MyUserRegistration()}
+    return render(req, 'Falcon9Launches/login.html', context)
+
+
+def register(req):
+    form = UserCreationForm()
+    if req.method =='POST':
+        form = UserCreationForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('login'))
+    context = {'form': form}
+    return render(req, 'Falcon9Launches/register.html', context)

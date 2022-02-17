@@ -11,7 +11,7 @@ nav{
     justify-content: space-evenly;
 }
 
-nav > a{
+nav a{
     color: #ddd;
     font-weight: 700;
     text-decoration: none;
