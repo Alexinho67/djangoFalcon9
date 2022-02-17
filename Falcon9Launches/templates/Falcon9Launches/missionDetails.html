@@ -8,11 +8,11 @@
         <p><strong>Name:</strong> {{mission.name}}</p>
         <p><strong>Operator:</strong> {{mission.operator}}</p>
         {% if mission.wikiLink %}
-        <p><strong>WikiLink :</strong> {{mission.wikiLink}}</p>
+        <p><strong>WikiLink :</strong> <a href="{{mission.wikiLink}}">{{mission.wikiLink}}</a></p>
         {% endif %}
         <p><strong>Flight:</strong> 
             {% if mission.flight %}
-                {{mission.flight.number}}
+               <a href="{% url "flightDetails" mission.flight.id%}">{{mission.flight.number}} </a></td>
             {% else %}
                 no flight assigned yet
             {% endif %}
