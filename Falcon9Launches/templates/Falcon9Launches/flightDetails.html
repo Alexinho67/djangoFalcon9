@@ -9,7 +9,7 @@
         <p><strong>Date:</strong> {{flight.date}}</p>
         <p><strong>Outcome:</strong> {{flight.get_outcome_display}}</p>
         <p><strong>Launch complex:</strong> <a href="{% url 'complexDetails' flight.launch_complex.id %}" />{{flight.launch_complex.name}}({{flight.launch_complex.launch_site.name}}) </a></p>
-        <p><strong>Mission:</strong> <a href="" />{{flight.mission.name}}</a></p>
+        <p><strong>Mission:</strong> <a href="{% url "missionDetails" flight.mission.id %}" />{{flight.mission.name}}</a></p>
         </div>
     </div>
     <a class="button edit" href = "{% url 'flightEdit' flight.id%}" > Edit </a> 

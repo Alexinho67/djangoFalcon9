@@ -7,6 +7,13 @@
         <p><strong>Database id:</strong> {{complex.id}}</p>
         <p><strong>Name:</strong> {{complex.name}}</p>
         <p><strong>Launch site:</strong> <a href="{% url "launchSiteDetails" complex.launch_site.id %}" >{{complex.launch_site.name}} </a></p>
+        <p><strong>Recent flights:</strong>
+            <ul>
+                {% for f in complex.flight_set.all %}
+                <li>Flight number: <a href="{% url "flightDetails" f.id %}">{{f.number}}</a> | Mission: <a href="{% url "missionDetails" f.mission.id%}">{{f.mission.name}}</a> </li>
+                {% endfor %}
+            </ul>
+        </p>
         {% if  complex.image%}
         <img src="{{complex.image.url}}" width="400" > </div>
     {% endif %}
